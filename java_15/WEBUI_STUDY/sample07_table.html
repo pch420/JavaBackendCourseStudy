@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table 연습</title>
+</head>
+<body>
+    <!-- table 태그 -->
+
+    <table border="1">
+        <tr>
+            <th>나이</th>
+            <th>성별</th>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>남</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>여</td>
+        </tr>
+    </table>
+    <!-- 
+     1)thead
+     2)tfoot
+     3)tbody 순으로 반드시 지정해야 된다. ==> html4
+
+     html5에서는 임의로 지정 가능하다.
+
+    -->
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>가격</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td>총합</td>
+                <td>10000</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr>
+                <td>10</td>
+                <td>9000</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>1000</td>
+        </tbody>
+        
+        </tr>
+    </table>
+</body>
+</html>

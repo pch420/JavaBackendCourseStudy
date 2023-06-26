@@ -1,0 +1,1 @@
+alert("external 경고창")
