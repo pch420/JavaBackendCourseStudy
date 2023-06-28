@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css selector 의사코드 연습</title>
+
+    <style>
+        /* p태그의 부모기준으로 첫번째 자식이 p이면 반환(첫번째 자식이 p가 아니면 그대로 적용x) */
+        p:first-child{
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <p>I am a strong man.</p>
+    <p>I am a strong man.</p>
+    <div>
+     <p>div의 첫자식</p>
+    </div>
+</body>
+</html>

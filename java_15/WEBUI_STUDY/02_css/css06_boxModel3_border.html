@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css boxModel 연습</title>
+
+    <style>
+      /* 테두리:border */
+      div{
+        width: 200px;
+        height: 200px;
+        background-color: antiquewhite;
+        margin: 20px;
+      }
+      #one{
+        border-top-width: 10px;
+        border-right-width: 10px;
+        border-bottom-width: 10px;
+        border-left-width: 10px;
+        
+        border-top-style: solid;
+        border-right-style: dashed;
+        border-bottom-style: dotted;
+        border-left-style: solid;
+        
+        border-top-color: red;
+        border-right-color: blue;
+        border-bottom-color: yellow;
+        border-left-color: red;
+      }
+      #two{
+        border-width: 10px 20px;
+        border-style: solid dotted;
+        border-color: red blue;
+      }
+      #three{
+        border-width: 10px;
+        border-style: dotted;
+        border-color: red;
+      }
+      /* 가장 많이 쓰이는 축약형 */
+      #four{
+        border: 10px dotted red;
+        border-radius: 50px;
+      }
+
+    </style>
+</head>
+<body>
+  <div id="one">one</div>
+  <div id="two">two</div>
+  <div id="three">three</div>
+  <div id="four">four</div>
+</body>
+</html>

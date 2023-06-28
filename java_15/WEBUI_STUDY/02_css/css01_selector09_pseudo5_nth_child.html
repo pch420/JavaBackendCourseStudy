@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css selector 의사코드 연습</title>
+
+    <style>
+        /* p태그의 부모기준으로 n 번째 자식이 p이면 반환, :nth-child(n), n은 1부터 시작*/
+        p:nth-child(2){
+            color: red;
+        }
+        /* p태그의 부모기준으로 짝수번째 자식이 p이면 반환, :nth-child(n), n은 1부터 시작*/
+        p:nth-child(2n){
+            font-size: 30px;
+        }
+        /* p태그의 부모기준으로 홀수번째 자식이 p이면 반환, :nth-child(n), n은 1부터 시작*/
+        p:nth-child(2n-1){
+            background-color: yellow;
+        }
+
+    </style>
+</head>
+<body>
+  <p>1</p>
+  <p>2</p>
+  <p>3</p>
+  <p>4</p>
+  <p>5</p>
+  <p>6</p>
+  <p>7</p>
+</body>
+</html>
