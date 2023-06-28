@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user input연습</title>
+</head>
+<body>
+    <!-- 사용자 데이터 입력 태그 -->
+    <h2>GET 방식</h2>
+    <form action="target.html" method="get">
+        나이:<input type="text" name="age" id="age" value="10" readonly><br>
+        <label for="name">이름:</label><input type="text" name="username" autofocus id="name"><br>
+        <input type="text" name="address" required placeholder="주소입력" id="address"><br>
+        
+        
+        <input type="submit" value="로그인1">
+        
+    </form>
+    
+    <h2>POST 방식</h2>
+    <form action="target.html" method="post">
+        나이:<input type="text" name="age" id="age" value="10" readonly><br>
+        <label for="name">이름:</label><input type="text" name="username" autofocus id="name"><br>
+        <input type="text" name="address" required placeholder="주소입력" id="address"><br>
+        
+        
+        <input type="submit" value="로그인2">
+        
+    </form>
+</body>
+</html>

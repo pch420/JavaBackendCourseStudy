@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css selector id 연습</title>
+
+    <style>
+        #one{
+            color: red;
+        }
+        #two{
+            color: blue;
+        }
+        #one, #two{
+            font-size: 30px;
+        }
+        #one, p{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+	<div id="one">
+		<h1>Hello</h1>
+		<p>Hello2</p>
+		<h2>Hello3</h2>
+	</div>
+	<div id="two">
+		<h1>world</h1>
+		<p>world2</p>
+		<h2>world3</h2>
+	</div>
+	<div id="one">
+		<p>happy</p>
+	</div>
+
+    <script>
+        var x = document.querySelector("#one");
+        console.log(x);
+
+     </script>
+</body>
+</html>
