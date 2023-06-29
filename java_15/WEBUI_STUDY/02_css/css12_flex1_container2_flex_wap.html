@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css flex 연습</title>
+
+    <style>
+
+      .container{
+        background-color: powderblue;
+        
+        display: flex;
+
+        /* 컨테이너 크기를 줄이면 item 크기도 자동을 줄어든다.
+        이유는 주축에 item들을 모두 보여주기 위해서이다.
+        기본값은 nowrap 이다. */
+        /* flex-wrap: nowrap */
+
+        /* item크기를 동일하게 맞추기 위해 줄바꿈(개행)된다. */
+        /* flex-wrap: wrap; */
+        
+        /* item크기를 동일하게 맞추기 위해 순서가 거꾸로 줄바꿈(개행)된다. */
+        flex-wrap: wrap-reverse;
+
+      }
+      .item{
+        background-color: tomato;
+        color:white;
+        border:1px solid white;
+        width: 300px;
+      }
+    </style>
+    
+</head>
+<body>
+  <div class="container">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+  </div>
+</body>
+
+</html>

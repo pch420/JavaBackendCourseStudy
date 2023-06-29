@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css flex 연습</title>
+
+    <style>
+
+      .container{
+        background-color: powderblue;
+        
+        display: flex;
+
+        /* flex-direction: row;
+        flex-wrap: wrap; */
+
+        /* flex-direction 과 flex-wrap 을 한꺼번에 표현하는 단축표현식 */
+        flex-flow: row wrap;
+
+      }
+      .item{
+        background-color: tomato;
+        color:white;
+        border:1px solid white;
+        width: 300px;
+      }
+    </style>
+    
+</head>
+<body>
+  <div class="container">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+  </div>
+</body>
+
+</html>
