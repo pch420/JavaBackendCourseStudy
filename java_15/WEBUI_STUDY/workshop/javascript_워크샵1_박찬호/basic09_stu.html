@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>Insert title here</title>
+   <script type="text/javascript">
+
+      var msg = prompt("1.정수값을 입력하시오.");
+      var score = 0;
+
+      console.log("입력값: ", msg);
+
+      msg = Number.parseInt(msg);
+
+      if (msg >= 90) {
+         score = 1;
+      } else if (msg >= 80) {
+         score = 2;
+      } else if (msg >= 70) {
+         score = 3;
+      } else {
+         score = 4;
+      }
+
+      console.log("등급:", score, "등급");
+
+
+   </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

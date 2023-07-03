@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <script type="text/javascript">
+
+    var user_input = prompt("정수값을 입력하시오.");
+    var msg = "입력값:" + user_input;
+    user_input = Number.parseInt(user_input);
+
+    if (user_input % 3 == 0) {
+      msg += " foo";
+    } 
+    if (user_input % 5 == 0) {
+      msg += " bar";
+    }
+    if (user_input % 7 == 0) {
+      msg += " baz";
+    }
+
+    console.log(msg);
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

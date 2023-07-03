@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <script type="text/javascript">
+
+    var user_input1 = prompt("1.정수값을 입력하시오.");
+    var user_input2 = prompt("2.정수값을 입력하시오.");
+    var user_input3 = prompt("3.정수값을 입력하시오.");
+
+    console.log("첫번째 입력값은:", user_input1);
+    console.log("두번째 입력값은:", user_input2);
+    console.log("세번째 입력값은:", user_input3);
+
+    user_input1 = Number.parseInt(user_input1);
+    user_input2 = Number.parseInt(user_input2);
+    user_input3 = Number.parseInt(user_input3);
+
+    var temp = 0;
+
+    if (user_input1 >= user_input2 && user_input1 >= user_input3) {
+      temp = user_input1;
+    } else if (user_input2 >= user_input3) {
+      temp = user_input2;
+    } else {
+      temp = user_input3;
+    }
+
+    console.log("가장 큰 값:", temp);
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

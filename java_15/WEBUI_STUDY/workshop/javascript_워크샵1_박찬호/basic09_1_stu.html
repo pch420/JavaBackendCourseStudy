@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script type="text/javascript">
+
+        var msg1 = prompt("1.면접 점수값을 입력하시오.");
+        var msg2 = prompt("2.영어 점수값을 입력하시오.");
+        var result = "";
+        
+        console.log("면접점수 값:",msg1);
+        console.log("영어점수 값:",msg2);
+        
+        msg1 = Number.parseInt(msg1);
+        msg2 = Number.parseInt(msg2);
+        
+        var score = (msg1 + msg2) / 2;
+
+        console.log("평균:",score);
+        
+        if(score >= 80){
+            result = "합격";
+        } else {
+            result = "불합격";
+        }
+        
+        console.log("합격여부:",result)
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
