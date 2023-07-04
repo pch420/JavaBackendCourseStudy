@@ -9,8 +9,27 @@
     <script>
 
         // 연산자8 - spread 연산자
+        // 문법: ...배열 ==> 배열의 각 요소를 분리해서 전개한다.
 
+        var n = [10, 20, 30];
+
+        // 1. 배열 복사
+        var n2 = [...n];
+        console.log(n.toString(), n2.toString()); //10,20,30 10,20,30
+
+        // 2. 배열 연결
+        var n = [10, 20, 30];
+        var n2 = [1, 2, 3];
+        var result = [...n, ...n2];
+        console.log(result.toString()); //10,20,30,1,2,3
         
+        // 3. 기존배열에 임의의 값 추가
+        var n = [10, 20, 30];
+        var result = [...n, 40, 50];
+        console.log(result.toString()); //10,20,30,40,50
+
+
+
 
     </script>
 </head>

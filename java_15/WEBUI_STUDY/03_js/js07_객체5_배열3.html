@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        // Array 객체 : 배열 관리
+
+        var arr = [6, 2, 8, 5, 1, 7, 9]; // 6,2,8,5,1,7,9
+        console.log(arr.toString());
+
+        // 거꾸로: 자신이 변경
+        arr.reverse();
+        console.log(arr.toString()); // 9,7,1,5,8,2,6
+
+        // 부분배열: 새로운 배열로 반환
+        var arr2 = arr.slice(0, 4); //0~3
+        console.log(arr.toString(), arr2.toString());
+
+        // 특정값의 위치값 반환
+        console.log(arr.indexOf(9)); // 0
+        console.log(arr.indexOf(10)); // -1, 없으면 -1 반환
+
+        //정렬
+        var arr = [6, 2, 8, 5, 1, 7, 9];
+        arr.sort();
+        console.log(arr.toString()); // 1,2,5,6,7,8,9 , 기본이 오름차순
+
+        var arr = [16, 25, 8, 75, 91, 17, 9];
+        arr.sort(function (a, b) { return a - b }); // 오름차순
+        console.log(arr.toString()); // 16,17,25,75,8,9,91
+
+        arr.sort(function (a, b) { return b - a }); // 내림차순
+        console.log(arr.toString()); // 16,17,25,75,8,9,91
+
+        // "홍길동/이순신/유관순" ==> ['홍길동', '이순신', '유관순'] ,  s.split("/")
+
+        //  ['홍길동', '이순신', '유관순']  == > "홍길동/이순신/유관순", arr.join("/")
+
+        var arr = ['홍길동', '이순신', '유관순'];
+        var s = arr.join(); // 기본 구분자 ,(쉼표) : 홍길동,이순신,유관순
+        var s = arr.join("/"); // 홍길동/이순신/유관순
+        var s = arr.join(" and "); // 홍길동 and 이순신 and 유관순
+        console.log(s);
+
+        // 배열 채우기 : 원본이 변경됨.
+        var arr = [6, 2, 8, 5, 1, 7, 9];
+        arr.fill(100);
+        console.log(arr.toString()); // 100,100,100,100,100,100,100
+        arr.fill(90, 1, 4);
+        console.log(arr.toString()); // 100,90,90,90,100,100,100
+
+    </script>
+</head>
+
+<body>
+    <p>안녕하세요</p>
+</body>
+
+</html>

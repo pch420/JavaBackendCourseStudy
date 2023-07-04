@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        // String 객체 ==> 문자열 생성
+        var s = "hello"; //권장한다.
+        console.log(s.length);
+
+        var s = new String("hello");
+        console.log(s.length);
+
+        //메서드
+        var c = s.charAt(2);
+        console.log("1. 특정문자얻기:", s.charAt(0), s.charAt(1), c);
+
+        console.log("2. 문자열 연결:", s.concat(" !!"));
+        console.log("2. 문자열 연결:", s.concat(" !!", " ##", " %%%")); // concat(...n) => 가변인자
+
+        console.log("3. 특정문자 위치조회:", s.indexOf("e")); // indexOf(searchString, position?), ?는 없거나 1개(생략할 수 있는 옵션)
+        console.log("3. 특정문자 위치조회:", s.indexOf("e", 2)); // indexOf(searchString, position?), ?는 없거나 1개(생략할 수 있는 옵션)
+        console.log("3. 특정문자 위치조회:", s.indexOf("x")); // 못찾으면 -1 반환
+
+        console.log("4. 부분열:", s.substring(0, 4)); // 0 ~ 3, substring(시작위치, 끝위치): 끝위치는 포함안됨.
+        console.log("4. 부분열:", s.substr(0, 3)); //0 에서 시작해서 3개의 문자열 반환, substr(시작위치, 길이)
+
+        var s = "HeLLo WoRLD";
+
+        console.log("5. 대문자:", s.toUpperCase());
+        console.log("6. 소문자:", s.toLowerCase());
+
+        console.log("7. 지정된 문자열로 시작하냐?:", s.startsWith("He"), s.startsWith("x"));
+        console.log("7. 지정된 문자열로 끝하냐?:", s.endsWith("D"), s.endsWith("x"));
+
+        // If you replace a value, only the first instance will be replaced.
+        console.log("8. 변경:", s.replace("L", "X")); // HeXLO WoRLD
+        console.log("8. 변경:", s.replaceAll("L", "X")); // HeXXo WoRXD
+
+        var s = "     hello     ";
+        console.log("9. 총길이:", s.length);
+        console.log("9. 공백제거:", s.trim());
+        console.log("9. 공백제거 후 길이:", s.trim().length); // 메서드 체인(메서드를 이어쓰는 것)
+
+        var s = "홍길동/이순신/유관순";
+        var arr = s.split("/");
+        console.log("10. 구분자로 분리:", arr); //['홍길동', '이순신', '유관순']
+
+        var arr = s.split("/", 2);
+        console.log("10. 구분자로 분리:", arr); //['홍길동', '이순신']
+        
+        console.log("11. 문자열 포함 여부:", s.includes("이순신")); 
+        console.log("11. 문자열 포함 여부:", s.includes("강감찬")); 
+        
+        console.log("12. repeat:", s.repeat(2)); 
+
+        //원본 출력 ==> 문자열은 변경안됨. 메서드를 사용해서 가공하면, 가공된 새로운 문자열이 생성된다.
+        console.log("원본:", s);
+
+
+    </script>
+</head>
+
+<body>
+    <p>안녕하세요</p>
+</body>
+
+</html>
