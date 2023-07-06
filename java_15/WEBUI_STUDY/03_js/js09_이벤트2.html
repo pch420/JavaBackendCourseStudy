@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        // 이벤트
+
+        /*
+           button, checkbox: click 이벤트타입 ==> onclick
+           form태그의 submit:  submit 이벤트타입 ==> onsubmit (중요하다)
+           input :  keyup 이벤트타입             ==> onkeyup
+           select : change 이벤트 타입           ==> onchange
+           img : mouseover, mouseout 이벤트타입  ==> onmouseover, onmouseout
+         */
+        function fun() {
+            console.log("fun");
+            console.log(event);
+            
+            event.preventDefault(); // submit 방지
+        }
+        
+        function xxx(){
+            console.log("xxx");
+        }
+        
+        function yyy(){
+            console.log("yyy");
+            event.stopPropagation(); // 이벤트 전파 방지
+        }
+
+
+    </script>
+
+</head>
+
+<body>
+    <h2>자동 submit 방지</h2>
+    <form action="target.html" method="get" onsubmit="fun()">
+        나이:<input type="text" name="age"><br>
+
+        <input type="submit" value="전송">
+    </form>
+
+    <h2>이벤트 전파 방지</h2>
+    <div style="background: yellow;" onclick="xxx()">
+        xxx
+        <div style="background-color: blue;" onclick="yyy()">
+            yyy
+        </div>
+    </div>
+
+</body>
+
+</html>

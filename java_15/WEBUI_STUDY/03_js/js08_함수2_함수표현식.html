@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        // 함수 (function)
+
+        // 함수 선언식
+        function fun() {
+            console.log("함수 선언식: fun");
+        }
+        fun(); // 함수 호출하면서 사용.
+        console.log(fun); // 함수명만 사용 ==> 콜백함수 주로 사용
+
+        // 함수 표현식
+        var fun = function () {
+            console.log("함수 표현식: fun");
+        };
+        fun(); //함수 호출하면서 사용.
+        console.log(fun); // 함수명만 사용
+        
+        //////////////////////////////////////////////////////
+        
+        // 함수 선언식
+        function fun2(n, n2) {
+            console.log("함수 선언식 fun2", n, n2);
+        }
+        fun2(10, "홍길동"); 
+        
+        // 함수 표현식
+        var fun2 = function (n, n2) {
+            console.log("함수 표현식 fun2", n, n2);
+        }
+        fun2(10, "홍길동"); 
+        
+        
+        ///////////////////////////////////////////
+        
+        // 함수 선언식
+        function fun4(n, n2) {
+            console.log("함수 선언식 fun4", n, n2);
+            return n + n2;
+        }
+        var result = fun4(10, 20); // 함수 선언식 fun4 10 20
+        console.log(result); // 30
+        
+        // 함수 표현식
+        var fun4 = function (n, n2) {
+            console.log("함수 표현식 fun4", n, n2);
+            return n + n2;
+        };
+        var result = fun4(10, 20); // 함수 표현식 fun4 10 20
+        console.log(result); // 30
+        
+
+    </script>
+</head>
+
+<body>
+    <p>안녕하세요</p>
+</body>
+
+</html>

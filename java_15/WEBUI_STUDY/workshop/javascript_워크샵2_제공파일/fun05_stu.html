@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+
+    <script>
+        function even(...n) {
+            var sum = 0;
+            for (var i of n) {
+                if (i % 2 == 0) {
+                    sum += i;
+                }
+            }
+            return sum;
+        }
+        var mesg = even(1, 2, 3, 4, 5);
+        console.log(mesg);
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
