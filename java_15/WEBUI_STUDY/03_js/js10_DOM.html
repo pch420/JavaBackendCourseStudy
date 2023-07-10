@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        // 순차적으로 실행되기 때문에 p 태그 생성 후 접근해야함
+        // onload 이벤트 핸들러를 통해 태그 생성 후 함수를 호출하는 식으로 접근함
+        function init() {
+            var p = document.querySelector("p");
+            console.dir(p);
+
+            // 값 얻기
+            console.log(p.innerText); // Hello
+            console.log(p.innerHTML); // <span>Hello</span>
+            
+            // 값 변경
+            p.innerText = "world";
+            console.log(p.innerText); // Hello
+            p.innerHTML = "<h1>world</h1>";
+            console.log(p.innerText); // Hello
+        }
+
+    </script>
+</head>
+
+<body onload="init()">
+    <p><span>Hello</span></p>
+
+</body>
+
+</html>

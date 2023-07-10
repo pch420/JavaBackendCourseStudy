@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // DOM Level 0의 고전방식으로 이벤트 처리
+        // document.querySelector(선택자)
+
+        function init() {
+            document.querySelector("button").onclick = function(){
+                document.querySelector("#img").src = "images/pineapple.jpg";
+            };
+        }
+
+
+    </script>
+</head>
+
+<body onload="init()">
+    <img src="images/001.png" width="100" height="100" id="img">
+    <button>이미지 변경</button>
+</body>
+
+</html>

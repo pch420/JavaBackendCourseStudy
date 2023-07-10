@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // DOM Level 0의 고전방식으로 이벤트 처리
+        // document.querySelector(선택자)
+
+        var xxx = function () {
+            var p = document.getElementById("xxx");
+            var p = document.querySelector("#xxx");
+            console.log(p);
+            p.innerText = "World";
+            p.innerHTML = "<h1>World</h1>";
+
+        };
+
+        function init() {
+            document.querySelector("#chk").onclick = xxx; //콜백함수로 처리함.
+
+        }
+
+    </script>
+</head>
+
+<body onload="init()">
+    <p id="xxx"><span>Hello</span></p>
+    <button id="chk">변경</button>
+
+</body>
+
+</html>

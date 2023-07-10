@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // DOM Level 0의 인라인방식으로 이벤트 처리
+        function btn_change() {
+            var p = document.getElementById("xxx");
+            var p = document.querySelector("#xxx");
+            p.innerText = "world";
+            p.innerHTML = "<h1>world</h1>";
+        }
+
+    </script>
+</head>
+
+<body>
+    <!-- 버튼에 의한 작업이므로 onload 안씀 -->
+    <p id="xxx"><span>Hello</span></p>
+    <button onclick="btn_change()">변경</button>
+
+</body>
+
+</html>

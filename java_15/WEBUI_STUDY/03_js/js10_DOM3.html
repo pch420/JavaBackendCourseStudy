@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // DOM Level 0의 인라인방식으로 이벤트 처리
+        function li_print() {
+            var li_arr = document.querySelectorAll("li");
+            console.log(li_arr);
+            for (var li of li_arr) {
+                console.log(li.innerText);
+            }
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <ul>
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+    </ul>
+    <button onclick="li_print()">값출력</button>
+</body>
+
+</html>

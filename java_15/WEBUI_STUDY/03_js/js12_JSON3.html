@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        // 사용자 정의 객체: JSON
+
+
+        var username = "홍길동";
+
+        const person = {
+
+            username, //username: username 와 동일(key와 value가 같을 때)
+            age: 20,
+            
+            // method 는 : 과 function 축약가능함
+            //getusername: function () { return this.username; }, 
+            getusername() { return this.username; },
+            // getage: function () { return this.age; },
+            getage() { return this.age; },
+
+
+            // setusername: function (name) { this.username = name; },
+            setusername(name) { this.username = name; },
+            // setage: function (a) { this.age = a; }
+            setage(a) { this.age = a; }
+        };
+
+        // 2. person 객체의 속성(property) 사용
+        console.log(person.username, person.age);
+        person.setusername("이순신");
+        person.setage(44);
+        console.log(person.getusername(), person.getage());
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
