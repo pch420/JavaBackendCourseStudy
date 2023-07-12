@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- CDN 방식 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <script>
+
+        // DOM Tree가 모두 완료된 후 호출
+
+        $(document).ready(function () {
+
+            $("#ok").on("click", function () {
+                $("div").html("<button id='x'>ok</button>");
+            });
+
+            $("body").on("click", "#x", function () {
+                console.log("ok");
+            })
+
+
+
+
+        });
+    </script>
+
+</head>
+
+<body>
+    <button id="ok">버튼추가</button><br>
+    <div></div>
+
+</body>
+
+</html>

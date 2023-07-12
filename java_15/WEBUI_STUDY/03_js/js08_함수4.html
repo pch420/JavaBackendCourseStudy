@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        // 함수 (function)
+        // arrow 함수와 this
+
+        console.log(window, this);
+
+        // js는 동적으로 변수를 추가할 수 있음
+        this.n = 20; // window객체에 동적으로 n 변수에 20저장
+
+        var x = {age:20};
+        x.name="홍길동";
+        console.log(x);
+
+        // 익명함수
+        var a = {
+            n:10,
+            f:function(){
+                console.log("익명함수:",this); // a 사용자 객체
+            }
+        };
+        a.f();
+
+        // arrow 함수
+        // arrow 함수내에서의 this는 arrow함수를 가진 사용자 객체가 아닌 전역객체를 참조한다.
+        var b = {
+            n:10,
+            f:()=>{
+                console.log("arrow함수:",this); // Window 객체
+            }
+        };
+        b.f();
+        
+    </script>
+</head>
+
+<body>
+    <p>안녕하세요</p>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- CDN 방식 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <script>
+
+        // DOM Tree가 모두 완료된 후 호출
+
+        $(document).ready(function () {
+
+            // ok2를 클릭하면 ok 반응
+            $("#ok").on("click", function () {
+                console.log("ok");
+            });
+            
+            $("#ok2").on("click", function () {
+                // ok버튼에 trigger 이벤트 발생
+                $("#ok").trigger("click"); // 선택자에 등록된 이벤트만 trigger 가능
+            });
+            
+
+
+
+
+        });
+    </script>
+
+</head>
+
+<body>
+    <button id="ok">버튼추가</button><br>
+    <button id="ok2">버튼추가</button><br>
+    
+</body>
+
+</html>
