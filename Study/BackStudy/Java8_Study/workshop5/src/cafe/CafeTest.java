@@ -8,11 +8,11 @@ public class CafeTest {
 		cafe.setCoffee(new Coffee("Americano", 4000));
 		cafe.setCoffee(new Coffee("Caffelatte", 5000));
 		cafe.setCoffee(new Coffee("Macchiato", 6000));
-		for (Coffee c : cafe.getCoffeeList()) {
-			System.out.println(c.toString());
+		for (Coffee coffee : cafe.getCoffeeList()) {
+			System.out.println(coffee.toString());
 		}
 		System.out.println();
-		System.out.println("Coffee 가격의 합 :" + cafe.totalPrice() + "원");
+		System.out.println(String.format("Coffee 가격의 합 : %d원", cafe.totalPrice()));
 
 	}
 

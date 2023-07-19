@@ -1,17 +1,20 @@
 package cafe;
 
 public class Cafe {
-	private Coffee[] coffeeList = new Coffee[3];
-	private int index = 0;
 
+	// Cafe has a Coffee 목록
+	private Coffee[] coffeeList;
+	private int index;
+
+	// 생성자 : 인스턴스 변수 초기화
 	public Cafe() {
-		// TODO Auto-generated constructor stub
+		coffeeList = new Coffee[3];
 	}
 
 	public int totalPrice() {
 		int totalPrice = 0;
-		for (Coffee c : coffeeList) {
-			totalPrice += c.getPrice();
+		for (Coffee coffee : coffeeList) {
+			totalPrice += coffee.getPrice();
 		}
 		return totalPrice;
 	}
