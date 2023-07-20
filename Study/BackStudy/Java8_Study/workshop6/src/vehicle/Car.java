@@ -20,7 +20,7 @@ public class Car extends Vehicle {
 	}
 
 	public void moving(int distance) {
-		restOil -= distance / getEfficiency();
+		restOil -= (distance / getEfficiency());
 	}
 
 	public void addWeight(int weight) {
@@ -33,8 +33,7 @@ public class Car extends Vehicle {
 
 	@Override
 	public String toString() {
-		String toString = super.toString() + " \t " + restOil + " \t " + curWeight;
-		return toString;
+		return super.toString() + " \t " + restOil + " \t " + curWeight;
 	}
 
 	public double getRestOil() {

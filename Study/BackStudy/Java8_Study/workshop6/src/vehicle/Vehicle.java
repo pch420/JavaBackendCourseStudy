@@ -14,11 +14,9 @@ public class Vehicle {
 		this.efficiency = efficiency;
 	}
 
+	@Override
 	public String toString() {
-		String toString;
-		toString = String.format(maxWeight + " \t " + oilTankSize);
-
-		return toString;
+		return String.format(maxWeight + " \t " + oilTankSize);
 	}
 
 	public int getMaxWeight() {

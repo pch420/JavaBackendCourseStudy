@@ -37,7 +37,6 @@ public class Truck extends Car {
 
 	@Override
 	public String toString() {
-
 		return super.toString() + " \t " + getEfficiency();
 	}
 
