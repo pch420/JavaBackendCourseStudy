@@ -2,28 +2,22 @@ package shape;
 
 public class Triangle extends Shape implements Resize {
 
-	public Triangle() {
-		// TODO Auto-generated constructor stub
-	}
+	public Triangle() {}
 
 	public Triangle(int width, int height, String colors) {
 		super(width, height, colors);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public double getArea() {
-		double area;
-		area = getWidth() * getHeight() * 0.5;
-		return area;
+		// 밑변 * 높이/2
+		return (double) getWidth() * getHeight() / 2;
 	}
 
 	@Override
 	public void setResize(int size) {
-		int resize;
-		resize = getHeight() + size;
-		setHeight(resize);
-
+		int update = getHeight() + size;
+		setHeight(update);
 	}
 
 }

@@ -6,9 +6,7 @@ public abstract class Shape {
 	private int height;
 	private String colors;
 
-	public Shape() {
-		// TODO Auto-generated constructor stub
-	}
+	public Shape() {}
 
 	public Shape(int width, int height, String colors) {
 		this.width = width;
@@ -16,6 +14,7 @@ public abstract class Shape {
 		this.colors = colors;
 	}
 
+	// 추상 메서드
 	public abstract double getArea();
 
 	public int getWidth() {
