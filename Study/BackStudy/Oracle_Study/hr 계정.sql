@@ -656,3 +656,326 @@ FROM employees
 group by department_id
 having SUM(salary) > 30000;
 
+-- 제약조건 검색
+select *
+from user_constraints;
+
+select *
+from USER_CONSTRAINTS
+where TABLE_NAME = 'EMPLOYEES';
+
+select *
+from USER_CONSTRAINTS
+where TABLE_NAME = 'DEPARTMENTS';
+
+-- (equi 조인, inner 조인)
+SELECT last_name,department_name
+FROM employees, departments 
+WHERE employees.department_id = departments.department_id;
+
+SELECT employees.last_name,departments.department_name
+FROM employees, departments 
+WHERE employees.department_id = departments.department_id;
+
+-- 지정된 테이블에 모두 존재하는 컬럼은 반드시 테이블명.컬럼명 형식으로 작성해야 함
+SELECT last_name,department_name, employees.department_id 
+FROM employees, departments 
+WHERE employees.department_id = departments.department_id;
+
+-- 테이블에 별칭
+SELECT emp.last_name,department_name, emp.department_id 
+FROM employees emp, departments dept 
+WHERE emp.department_id = dept.department_id;
+
+-- 주의 : 별칭을 지정하면 반드시 별칭을 사용해야 된다. 테이블명 사용불가
+SELECT employees.last_name,department_name, emp.department_id 
+FROM employees emp, departments dept 
+WHERE employees.department_id = dept.department_id;
+
+-- 검색조건 추가 ==> 오라클조인은 where 절에 조인조건과 검색조건을 같이 지정한다.
+SELECT emp.last_name,salary,department_name 
+FROM employees emp, departments dept 
+WHERE emp.department_id = dept.department_id 
+      AND last_name='Whalen';
+
+-- 기존 문법 모두 사용 가능
+SELECT d.department_name 부서명, COUNT(e.employee_id) 인원수 
+FROM employees e, departments d 
+WHERE e.department_id = d.department_id AND TO_CHAR( hire_date , 'YYYY') <= 2005 
+GROUP BY d.department_name
+ORDER BY 2;
+
+-- Non-Equi 조인 (employees, job_grades 조인)
+SELECT last_name, salary, grade_level 
+FROM employees e, job_grades g 
+WHERE e.salary BETWEEN g.lowest_sal AND g.highest_sal;
+
+-- n개의 테이블 조인시 n-1개의 조인이 필요
+SELECT last_name, salary, department_name, grade_level 
+FROM employees e, departments d, job_grades g 
+WHERE e.department_id = d.department_id 
+      AND e.salary BETWEEN g.lowest_sal AND g.highest_sal;
+
+-- self 조인
+
+-- 사원 테이블 가상으로 생성
+SELECT employee_id, last_name, manager_id
+FROM employees e;
+-- 관리자 테이블 가상으로 생성
+SELECT employee_id, last_name
+FROM employees m;
+
+-- 가상의 사원 테이블, 관리자 테이블을 조인 (inner 조인, self 조인)
+SELECT e.last_name 사원명, m.last_name 관리자명, m2.last_name as "관리자의 관리자명"
+FROM employees e, employees m, employees m2
+WHERE e.manager_id = m.employee_id 
+      and m.manager_id = m2.employee_id;
+
+-- outer 조인
+SELECT emp.last_name,department_name, emp.department_id 
+FROM employees emp, departments dept 
+WHERE emp.department_id = dept.department_id(+);
+
+SELECT e.last_name 사원명, m.last_name 관리자명 
+FROM employees e, employees m 
+WHERE e.manager_id = m.employee_id(+);
+
+SELECT e.last_name 사원명, m.last_name 관리자명, mm.last_name "관리자의 관리자명" 
+FROM employees e, employees m , employees mm 
+WHERE e.manager_id = m.employee_id(+) 
+      AND m.manager_id = mm.employee_id(+);
+      
+-- cartesian product 조인
+select emp.last_name, department_name, emp.department_id
+from employees emp, departments dept;
+
+-- ANSI
+-- natural join --> 공통컬럼은 테이블명.컬럼 또는 별칭.컬럼 사용불가, 다른 컬럼은 사용가능
+SELECT last_name, department_name, department_id 
+FROM employees NATURAL JOIN departments;
+
+SELECT e.last_name, d.department_name, department_id 
+FROM employees e NATURAL JOIN departments d;
+
+SELECT last_name,department_name, department_id 
+FROM employees e NATURAL JOIN departments d -- 조인조건
+WHERE department_id=90;                     -- 검색조건
+
+-- using 절 --> 공통컬럼은 테이블명.컬럼 또는 별칭.컬럼 사용불가, 다른 컬럼은 사용가능
+SELECT last_name,department_name, department_id 
+FROM employees e JOIN departments d USING(department_id);
+
+SELECT last_name,department_name, department_id 
+FROM employees e INNER JOIN departments d USING(department_id);
+
+SELECT last_name,department_name, department_id 
+FROM employees e INNER JOIN departments d USING(department_id); -- 조인조건
+WHERE department_id=90;                                         -- 검색조건
+
+-- ON 절 --> 오라클 조인과 동일하게 공통 컬럼은 별칭.컬럼 형식으로 사용해야 된다.
+-- 동등연산자 
+SELECT last_name,department_name, e.department_id 
+FROM employees e JOIN departments d ON e.department_id = d.department_id;
+
+SELECT last_name,department_name, e.department_id 
+FROM employees e INNER JOIN departments d ON e.department_id = d.department_id;
+
+SELECT last_name,department_name, e.department_id 
+FROM employees e INNER JOIN departments d ON e.department_id = d.department_id
+WHERE e.department_id=90;
+
+-- 부등연산자
+SELECT last_name, salary, grade_level
+FROM employees e, job_grades g
+WHERE e.salary BETWEEN g.lowest_sal AND g.highest_sal;
+
+SELECT last_name, salary, grade_level
+FROM employees e INNER JOIN job_grades g ON e.salary BETWEEN g.lowest_sal AND g.highest_sal;
+
+-- self 조인
+SELECT e.last_name 사원명, m.last_name 관리자명 
+FROM employees e, employees m
+WHERE e.manager_id = m.employee_id;
+
+SELECT e.last_name 사원명, m.last_name 관리자명 
+FROM employees e JOIN employees m ON e.manager_id = m.employee_id;
+
+SELECT e.last_name 사원명, d.department_name 부서명, g.grade_level 등급 
+FROM employees e INNER JOIN departments d ON e.department_id = d.department_id 
+                 INNER JOIN job_grades g ON e.salary BETWEEN g.lowest_sal AND g.highest_sal;
+                 
+SELECT e.last_name 사원명, d.department_name 부서명, g.grade_level 등급 
+FROM employees e INNER JOIN departments d USING(department_id)
+                 INNER JOIN job_grades g ON e.salary BETWEEN g.lowest_sal AND g.highest_sal;
+                 
+-- cross join
+SELECT last_name, department_name, e.department_id
+FROM employees e CROSS JOIN departments d;
+
+-- outer 조인
+
+-- 106개, department_id값이 null 가진 Grant 사원이 누락됨.
+SELECT last_name,department_name, department_id
+FROM employees e INNER JOIN departments d USING(department_id);
+
+-- 107개, department_id값이 null 가진 Grant 사원 포함됨
+SELECT last_name,department_name, department_id
+FROM employees e LEFT OUTER JOIN departments d USING(department_id);
+
+SELECT last_name,department_name, department_id
+FROM departments d RIGHT OUTER JOIN employees e USING(department_id);
+
+SELECT last_name,department_name, e.department_id
+FROM employees e LEFT OUTER JOIN departments d ON e.department_id = d.department_id;
+
+SELECT last_name,department_name, e.department_id
+FROM departments d RIGHT OUTER JOIN employees e ON e.department_id = d.department_id;
+
+-- sub query --
+SELECT salary
+FROM employees
+WHERE last_name = 'Whalen' ;
+
+SELECT *
+FROM employees
+WHERE salary >= 4400;
+
+-- main query
+SELECT last_name,salary 
+FROM employees WHERE salary >= (SELECT salary  -- sub query
+																FROM employees 
+																WHERE last_name='Whalen');
+   
+-- 단일행                             
+-- 사원들의 평균 월급보다 더 많은 월급을 받는 사원을 조회
+SELECT AVG(salary) 
+FROM employees; -- 6461.83
+
+SELECT last_name,salary 
+FROM employees
+WHERE salary >= 6461.831775700934579439252336448598130841;
+
+SELECT last_name,salary 
+FROM employees WHERE salary >= (SELECT AVG(salary) 
+                                FROM employees);
+
+--다음은 부서번호가 100인 사원들 중에서 최대 월급을 받는 사원과 동일한 월급을 받는 사원을 조회
+SELECT MAX(salary)
+FROM employees
+WHERE department_id = 100; --12008
+
+SELECT last_name,salary 
+FROM employees
+WHERE salary = 12008;
+
+SELECT last_name,salary 
+FROM employees
+WHERE salary = (select max(salary)
+                from employees
+                where department_id = 100);
+                
+SELECT department_id, MAX(salary) 
+FROM employees 
+GROUP BY department_id 
+HAVING MAX(salary) > (SELECT MAX(salary) 
+                      FROM employees 
+                      WHERE department_id=100 );
+                      
+--복수행
+-- 다중연산자 IN : 동등 연산자 비교
+SELECT salary 
+FROM employees 
+WHERE last_name IN ('Whalen','Fay');
+                  
+SELECT last_name, salary 
+FROM employees 
+WHERE salary IN ( SELECT salary 
+                  FROM employees 
+                  WHERE last_name IN ('Whalen','Fay') );
+                  
+-- 다중연산자 > all : 서브쿼리의 최대값보다 큰 값을 조회
+SELECT last_name, department_id, salary 
+FROM employees 
+WHERE salary > ALL (SELECT salary 
+                    FROM employees 
+                    WHERE job_id = 'IT_PROG');
+
+SELECT last_name, department_id, salary 
+FROM employees 
+WHERE salary > (SELECT MAX(salary) 
+                FROM employees 
+                WHERE job_id = 'IT_PROG');   
+
+-- 다중연산자 < all : 서브쿼리의 최소값보다 작은 값을 조회
+SELECT last_name, department_id, salary 
+FROM employees 
+WHERE salary < ALL (SELECT salary 
+                    FROM employees 
+                    WHERE job_id = 'IT_PROG');
+                    
+SELECT last_name, department_id, salary 
+FROM employees 
+WHERE salary < (SELECT MIN(salary) 
+                FROM employees 
+                WHERE job_id = 'IT_PROG');   
+                
+-- 다중연산자 > any : 서브쿼리의 최소값보다 큰 메인쿼리 조회                
+SELECT last_name, department_id, salary 
+FROM employees 
+WHERE salary > ANY (SELECT salary 
+                    FROM employees 
+                    WHERE job_id = 'IT_PROG');  
+
+SELECT last_name, department_id, salary 
+FROM employees 
+WHERE salary > (SELECT MIN(salary) 
+                FROM employees 
+                WHERE job_id = 'IT_PROG');    
+
+-- 다중연산자 < any : 서브쿼리의 최대값보다 작은 메인쿼리 조회                
+SELECT last_name, department_id, salary 
+FROM employees 
+WHERE salary < ANY (SELECT salary 
+                    FROM employees 
+                    WHERE job_id = 'IT_PROG');  
+
+SELECT last_name, department_id, salary 
+FROM employees 
+WHERE salary < (SELECT MAX(salary) 
+                FROM employees 
+                WHERE job_id = 'IT_PROG');  
+
+-- 다중연산자 EXISTS : 
+/*서브쿼리에 결과가 있으면 ( 존재하면 ) 메인 쿼리가 실행되고
+서브쿼리에 결과가 없으면 메인 쿼리가 실행 안됨.*/
+
+SELECT employee_id 
+FROM employees 
+WHERE commission_pct IS NOT NULL;
+
+SELECT last_name, department_id, salary 
+FROM employees 
+WHERE EXISTS (SELECT employee_id 
+              FROM employees 
+              WHERE commission_pct IS NOT NULL);               
+
+--다중 컬럼 서브쿼리 : 서브쿼리에서 여러 개의 컬럼값을 검색하여 메인쿼리의 조건절과 비교하는 서브쿼리
+SELECT last_name, department_id, salary 
+FROM employees 
+WHERE (department_id, salary) IN ( SELECT department_id, MAX(salary) 
+                                   FROM employees 
+                                   GROUP BY department_id ) 
+ORDER BY 2;
+
+--인라인 뷰( in-line view ) : FROM 절에서 사용된 서브쿼리
+SELECT e.department_id , SUM(salary) 총합, AVG(salary) 평균, COUNT(*) 인원수 
+FROM employees e , departments d 
+WHERE e.department_id = d.department_id 
+GROUP BY e.department_id ORDER BY 1;
+
+SELECT e.department_id, 합계, 평균, 인원수 
+FROM ( SELECT department_id, SUM(salary) 합계, AVG(salary) 평균 , COUNT(*) 인원수 
+       FROM employees 
+       GROUP BY department_id ) e, departments d 
+WHERE e.department_id = d.department_id 
+ORDER By 1;
