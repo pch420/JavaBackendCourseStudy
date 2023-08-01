@@ -119,3 +119,19 @@ from scott.emp;
 select *
 from hr.employees;
 
+--SCOTT에게 CREATE VIEW 권한 할당
+GRANT create view
+TO scott;
+
+SELECT *
+from scott.emp; -- 보안 이슈 ==> 해결 : 별칭
+
+create synonym s_emp
+for scott.emp;
+
+SELECT *
+from s_emp; -- 보안 이슈 해결
+
+drop synonym s_emp;
+
+show parameter db_name;

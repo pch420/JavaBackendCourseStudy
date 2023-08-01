@@ -485,3 +485,237 @@ create table sugang
   constraint sugang_studno_fk foreign key(studno) references student(studno),
   constraint sugang_subno_fk foreign key(subno) references subject(subno)
 );
+
+--테이블변경
+
+CREATE TABLE emp04 
+AS 
+SELECT * FROM emp;
+
+--컬럼추가
+ALTER TABLE emp04 
+ADD ( email VARCHAR2(10) , address VARCHAR2(20) );
+
+--컬럼변경 - 크기변경
+ALTER TABLE emp04 
+MODIFY ( email VARCHAR2(40) );
+
+--컬럼삭제
+ALTER TABLE emp04 
+DROP ( email );
+
+desc emp04;
+
+select *
+from emp04;
+
+CREATE TABLE dept03 
+( deptno NUMBER(2), 
+  dname VARCHAR2(15), 
+  loc VARCHAR2(15) );
+  
+-- 나중에 제약조건 추가 <- 현업에서 많이 사용하는 방식
+ALTER TABLE dept03
+ADD CONSTRAINT dept03_deptno_pk PRIMARY KEY(deptno);
+
+ALTER TABLE dept03
+ADD CONSTRAINT dept03_loc_uk UNIQUE(loc);
+
+-- NULL ==> not null (변경작업)
+ALTER TABLE dept03
+MODIFY ( dname VARCHAR2(15) CONSTRAINT dept03_dname_nn NOT NULL );
+
+-- Primary key 삭제
+ALTER TABLE dept03
+DROP PRIMARY KEY;
+
+-- Unique 삭제
+ALTER TABLE dept03
+DROP UNIQUE(loc);
+
+-- Not Null 삭제
+ALTER TABLE dept03
+DROP CONSTRAINT dept03_dname_nn;
+
+SELECT *
+FROM user_constraints
+WHERE table_name='DEPT03';
+
+--####################################
+SELECT *
+FROM user_constraints
+WHERE table_name='M2';
+
+SELECT *
+FROM user_constraints
+WHERE table_name='S2';
+
+-- m2의 primary key 삭제 
+ALTER TABLE m2
+DROP PRIMARY KEY CASCADE; -- M2, S2 제약조건 삭제
+
+--view
+--복잡한 SQL문
+SELECT empno,ename, d.dname, d.deptno 
+FROM emp e JOIN dept d ON e.deptno = d.deptno 
+WHERE e.deptno = 20;
+
+--복잡한 SQL문 ==> 단순화
+CREATE VIEW emp_view 
+AS
+SELECT empno,ename, d.dname, d.deptno 
+FROM emp e JOIN dept d ON e.deptno = d.deptno 
+WHERE e.deptno = 20;
+
+CREATE VIEW emp_view10 (no,name,dname,dno)
+AS
+SELECT empno,ename, d.dname, d.deptno 
+FROM emp e JOIN dept d ON e.deptno = d.deptno 
+WHERE e.deptno = 20;
+
+-- view 실행
+select *
+from emp_view;
+
+-- 테이블의 특정 컬럼 보호 목적
+-- emp의 sal이 매우 민감한 컬럼이라고 가정
+CREATE VIEW emp_view2 
+AS 
+SELECT empno,ename,job,mgr,hiredate,comm,deptno 
+FROM emp;
+
+select *
+from emp_view2;
+
+SELECT view_name, text 
+FROM user_views;
+
+-- 뷰 수정 ==> alter view sql문은 없다. create or replace 이용
+CREATE OR REPLACE VIEW emp_view2 -- 없으면 새로생성, 있으면 덮어쓰기함
+AS 
+SELECT empno,ename,job
+FROM emp;
+
+--CTAS
+create table copy_emp
+as
+select *
+from emp;
+
+select *
+from copy_emp;
+
+create or replace view copy_emp_view
+as
+select *
+from copy_emp; -- Base Table : view를 만들 때 쓴 테이블
+
+select *
+from copy_emp_view;
+
+-- view의 DML 작업 - (원본 테이블도 수정됨, view 생성할 때 group by, distinct 등 적용시 DML 안됨)
+DELETE FROM copy_emp_view
+where deptno = 20;
+
+-- DML 불가능하도록 읽기모드 뷰 생성
+create or replace view copy_emp_view2
+as
+select *
+from copy_emp -- Base Table
+with read only; -- DML 불가
+
+-- 에러
+DELETE FROM copy_emp_view2
+where deptno = 20;
+
+-- view가 sql문을 가지고 있는 것을 확인할 수 있음 (DATA를 가지고 있는게 아님)
+SELECT * 
+FROM user_views; 
+
+-- 뷰 삭제
+drop view COPY_EMP_VIEW2;
+
+-- 시퀀스
+-- base table
+create table copy_dept
+as
+select deptno as no, dname as name, loc as addr
+from dept
+where 1=2;
+
+select *
+from copy_dept;
+
+CREATE SEQUENCE copy_dept_no_seq 
+START WITH 10    -- 10부터 시작
+INCREMENT BY 10  -- 10씩 증가
+MAXVALUE 100     -- 최댓값 100까지
+MINVALUE 5       -- 최솟값 5 까지
+CYCLE            -- 다시 시작값은 MINVALUE 값 부터 시작함
+NOCACHE;         -- 미리 생성안함
+
+-- 시퀀스에서 값을 가져오는 방법 : 시퀀스명.nextval, 현재 값 확인 : 시퀀스명.currval
+select copy_dept_no_seq.nextval
+from dual;
+
+CREATE SEQUENCE dept_deptno_seq2
+START WITH 100
+INCREMENT BY -10
+MAXVALUE 150 
+MINVALUE 10 
+CYCLE            -- 다시 시작값은 maxvalue부터
+NOCACHE;
+
+select dept_deptno_seq2.nextval,dept_deptno_seq2.currval
+from dual;
+
+CREATE SEQUENCE my_seq;
+
+-- 메타정보 ( start with 값 정보는 없음 ==> 시퀀스 수정시 start with 수정불가)
+select *
+from user_sequences;
+
+--my_seq 시퀀스 이용해서 copy_dept 테이블의 no 컬럼을 넘버링..
+insert into copy_dept (no, name, addr) values (my_seq.nextval, 'aa', '서울');
+insert into copy_dept (no, name, addr) values (my_seq.nextval, 'bb', '서울');
+insert into copy_dept (no, name, addr) values (my_seq.nextval, 'cc', '서울');
+
+select *
+from copy_dept;
+
+drop sequence DEPT_DEPTNO_SEQ2;
+
+-- index 객체가 가지고 있는 주소값: rowid
+select rowid, empno, ename
+from emp;
+
+--AAAE+K   AAE    AAAAIv  AAA
+--테이블정보 파일정보 블럭정보 블럭내의행정보
+
+select *
+from USER_INDEXES
+where TABLE_NAME = 'EMP'; -- pk인 empno 때문에 인덱스가 존재함.
+
+select *
+from emp;
+
+-- ename에 인덱스 추가 ==> 정렬 및 B트리를 구현하는 오버헤드가 매우 크다. 따라서 인덱스는 남발하면 안된다.
+CREATE INDEX emp_ename_idx 
+ON emp(ename);
+
+select *
+from emp
+where ename = 'SMITH';
+
+select *
+from emp
+where UPPER(ename) = 'SMITH'; -- 함수는 인덱스 안됨
+
+select *
+from USER_INDEXES
+where TABLE_NAME = 'EMP'; -- pk인 empno 때문에 인덱스가 존재함.
+
+DROP INDEX emp_ename_idx;
+
+select deptno as no, dname, loc 
+from dept;
