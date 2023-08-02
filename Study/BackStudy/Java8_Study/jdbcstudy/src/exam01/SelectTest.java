@@ -28,7 +28,7 @@ public class SelectTest {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
 			System.out.println(e.getMessage());
-			// e.printStackTrace();
+			 e.printStackTrace();
 		}
 
 		Connection con = null;
@@ -39,7 +39,7 @@ public class SelectTest {
 
 			String sql = "select deptno as no, dname, loc from dept";
 
-			pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql); // 에러발생시
 			rs = pstmt.executeQuery();
 			while (rs.next()) { // 행선택
 				int deptno = rs.getInt("no");
