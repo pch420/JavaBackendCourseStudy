@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DeptMapper">
+
+	<select id="findAllPage" resultType="DeptDTO">
+		select deptno, dname, loc
+		from dept
+		order by 1
+	</select>
+
+	<select id="findAll" resultType="DeptDTO">
+		select deptno, dname, loc
+		from dept
+	</select>
+
+	<select id="findbyDeptno" resultType="DeptDTO"
+		parameterType="int">
+		select deptno, substr(dname,1) as dname, loc
+		from dept
+		where deptno = #{deptno}
+	</select>
+
+	<select id="findbyDeptnoAndDname" resultType="DeptDTO"
+		parameterType="DeptDTO">
+		<!-- CDATA 섹션  <을 부등호가 아닌 꺽쇠로 인식하기 때문에 xml문법인 cdata 섹션으로 감싸서 char로 인식시킴-->
+		<!-- like 연산자의 경우 와일드카드를 쓰기 위해 '와일드카드'와 ||로 연결시킴 -->
+		<![CDATA[
+		select deptno, dname, loc
+		from dept
+		where deptno < #{deptno} or dname like '%'||#{dname}||'%']]>
+		 
+	</select>
+
+	<select id="findbyDeptnoAndDnameMap" resultType="DeptDTO"
+		parameterType="hashmap">
+		select deptno, dname, loc
+		from dept
+		where deptno = #{key1} or dname=#{key2}
+	</select>
+
+</mapper>
