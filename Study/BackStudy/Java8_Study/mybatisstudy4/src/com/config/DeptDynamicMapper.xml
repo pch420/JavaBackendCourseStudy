@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DeptDynamicMapper">
+
+	<select id="selectByDeptnoMulti" resultType="DeptDTO"
+		parameterType="arraylist">
+		select deptno, dname,loc
+		from dept
+		where deptno IN
+		<foreach item="item" collection="list" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<select id="selectByDeptnoMulti2" resultType="DeptDTO"
+		parameterType="arraylist">
+		select deptno, dname,loc
+		from dept
+		<where>
+			<foreach item="item" collection="list" open="deptno IN ("
+				separator="," close=")">
+				#{item.deptno}
+			</foreach>
+		</where>
+	</select>
+
+	<delete id="deleteMulti" parameterType="arraylist">
+		delete from dept
+		<where>
+			<foreach item="item" collection="list" open="deptno IN ("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</where>
+	</delete>
+
+	<update id="updateMulti" parameterType="arraylist">
+		update dept
+		set dname='개발'
+		<where>
+			<foreach item="item" collection="list" open="deptno IN ("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</where>
+	</update>
+
+	<insert id="insertMulti" parameterType="arraylist">
+		insert all
+		<foreach item="item" collection="list">
+			into dept (deptno,dname,loc)
+			values (#{item.deptno},#{item.dname},#{item.loc})
+		</foreach>
+		select* from dual <!-- 문법 때문에 subquery가 필요하므로 더미데이터 사용함 -->
+	</insert>
+
+	<select id="selectAllorDname" parameterType="string"
+		resultType="DeptDTO">
+		select deptno, dname, loc
+		from dept
+		<where>
+			<if test="dname != null">
+				dname=#{dname}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectByDnameChoose" parameterType="hashmap"
+		resultType="DeptDTO">
+		select deptno, dname, loc
+		from dept
+		<where>
+			<choose>
+				<when test="dname == '개발'">
+					deptno IN (10,20,30)
+				</when>
+				<when test="dname == '영업부'">
+					deptno = 40
+				</when>
+				<otherwise>
+					deptno IN (90,91,92)
+				</otherwise>
+			</choose>
+		</where>
+
+	</select>
+
+</mapper>
