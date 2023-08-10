@@ -161,7 +161,7 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
       
-      <Context docBase="HelloWeb" path="/exam01" reloadable="true" source="org.eclipse.jst.jee.server:HelloWeb"/><Context docBase="hello_s" path="/hello_s" reloadable="true" source="org.eclipse.jst.jee.server:hello_s"/><Context docBase="01_servlet" path="/01_servlet" reloadable="true" source="org.eclipse.jst.jee.server:01_servlet"/><Context docBase="01_servlet2" path="/01_servlet2" reloadable="true" source="org.eclipse.jst.jee.server:01_servlet2"/><Context docBase="JSPWorkshop01" path="/JSPWorkshop01" reloadable="true" source="org.eclipse.jst.jee.server:JSPWorkshop01"/></Host>
+      <Context docBase="HelloWeb" path="/exam01" reloadable="true" source="org.eclipse.jst.jee.server:HelloWeb"/><Context docBase="hello_s" path="/hello_s" reloadable="true" source="org.eclipse.jst.jee.server:hello_s"/><Context docBase="01_servlet" path="/01_servlet" reloadable="true" source="org.eclipse.jst.jee.server:01_servlet"/><Context docBase="01_servlet2" path="/01_servlet2" reloadable="true" source="org.eclipse.jst.jee.server:01_servlet2"/><Context docBase="JSPWorkshop01" path="/JSPWorkshop01" reloadable="true" source="org.eclipse.jst.jee.server:JSPWorkshop01"/><Context docBase="02_servlet" path="/02_servlet" reloadable="true" source="org.eclipse.jst.jee.server:02_servlet"/><Context docBase="02_servlet2" path="/02_servlet2" reloadable="true" source="org.eclipse.jst.jee.server:02_servlet2"/><Context docBase="02_servlet3" path="/02_servlet3" reloadable="true" source="org.eclipse.jst.jee.server:02_servlet3"/></Host>
     </Engine>
   </Service>
 </Server>

@@ -2,6 +2,10 @@ package com.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -21,9 +25,28 @@ public class LoginServlet extends HttpServlet {
 		// 사용자 입력 데이터 얻기
 		String userid = request.getParameter("userid");
 		String passwd = request.getParameter("passwd");
-		String xxx = request.getParameter("addr");
+		String xxx = request.getParameter("addr"); // 없는 데이터라 null이 뜸
 
 		System.out.println(userid + "\t" + passwd + "\t" + xxx);
+		System.out.println("########################################");
+
+		// Enumeration<String> getParameterNames() ==> tag의 name값 얻기
+		Enumeration<String> enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement(); // tag name 얻기
+			String value = request.getParameter(name); // 사용자 입력값 얻기
+			System.out.println(name + "\t" + value);
+		}
+		System.out.println("########################################");
+		
+		// Map<String, String[]> getParameterMap()
+		Map<String, String[]> map = request.getParameterMap();
+		Set<String> keys = map.keySet();
+		for (String key : keys) {
+//			System.out.println(key);
+			String[] values = map.get(key);
+			System.out.println(key + "\t" + Arrays.toString(values));
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
