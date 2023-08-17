@@ -719,3 +719,18 @@ DROP INDEX emp_ename_idx;
 
 select deptno as no, dname, loc 
 from dept;
+
+-- 게시판 테이블 작성
+create table board
+( num NUMBER(4) CONSTRAINT board_num_pk PRIMARY KEY,
+  title VARCHAR2(200) CONSTRAINT board_title_nn NOT NULL,
+  author VARCHAR2(20) CONSTRAINT board_author_nn NOT NULL,
+  content VARCHAR2(400),
+  writeday DATE DEFAULT SYSDATE,
+  readcnt NUMBER(4) DEFAULT 0 );
+  
+create sequence board_seq;
+
+insert into board ( num, title, author, content )
+values ( board_seq.nextval , '테스트', '홍길동', '테스트입니다' );
+commit;
