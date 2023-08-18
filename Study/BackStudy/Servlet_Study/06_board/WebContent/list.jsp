@@ -1,3 +1,4 @@
+<%@page import="com.dto.PageDTO"%>
 <%@page import="com.dto.BoardDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,7 +24,9 @@
 <body>
 	<h2>게시판 목록보기</h2>
 	<%
-		List<BoardDTO> list = (List<BoardDTO>) request.getAttribute("boardList");
+		PageDTO pageDTO = (PageDTO) request.getAttribute("pageDTO");
+	// PageDTO 에 저장된 4개의 데이터 중에서 List만 얻고 출력하기
+		List<BoardDTO> list = pageDTO.getList();
 	%>
 	<table border="1">
 	<!-- 검색 화면 -->
@@ -65,7 +68,38 @@
 		<%
 			}
 		%>
-
+	<!-- page 번호 출력 -->
+	<%
+		int perPage = pageDTO.getPerPage();
+		int curPage = pageDTO.getCurPage();
+		int totalCount = pageDTO.getTotalCount();
+		
+		// page 숫자 만들기
+		int totalNum = totalCount / perPage;
+		if(totalCount % perPage != 0){
+			totalNum++;
+		}
+	%>
+	<tr>
+	<td colspan="6">
+		<%
+			for(int i = 1 ; i <= totalNum; i++){
+				if(curPage == i){
+		%>
+			<%= i %>
+			<%
+				}else{
+			%>
+			<a href="list?curPage=<%= i %>"><%= i %></a>
+			<%
+				} // end if
+			%>
+		<%
+			}// end for
+		%>
+	</td>
+	</tr>
+	
 	</table>
 	<a href="writeui">글쓰기</a>
 </body>
