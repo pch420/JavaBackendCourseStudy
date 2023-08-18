@@ -37,7 +37,25 @@ public class BoardServiceImpl implements BoardService {
 		} finally {
 			session.close();
 		}
-		return 0;
+		return n;
+	}
+
+	@Override
+	public BoardDTO retrieve(int num) {
+		BoardDTO dto = null;
+		SqlSession session = MySqlSessionFactory.getSession();
+		try {
+			// DAO 연동코드
+			BoardDAO dao = new BoardDAO();
+			// 조회수 증가
+			int n = dao.readcnt(session, num);
+			session.commit();
+			// 글 자세히 보기
+			dto = dao.retrieve(session, num);
+		} finally {
+			session.close();
+		}
+		return dto;
 	}
 
 	/*-
