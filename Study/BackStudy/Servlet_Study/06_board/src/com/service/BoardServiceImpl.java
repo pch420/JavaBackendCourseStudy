@@ -24,6 +24,22 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return list;
 	}
+
+	@Override
+	public int write(BoardDTO dto) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		try {
+			// DAO 연동코드
+			BoardDAO dao = new BoardDAO();
+			n = dao.write(session, dto);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return 0;
+	}
+
 	/*-
 	 * 		SqlSession session = MySqlSessionFactory.getSession();
 			try {

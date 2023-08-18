@@ -40,5 +40,6 @@
 		%>
 
 	</table>
+	<a href="writeui">글쓰기</a>
 </body>
 </html>
