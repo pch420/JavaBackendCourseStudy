@@ -12,5 +12,7 @@ public interface BoardService {
 	public int write(BoardDTO dto);
 	
 	public BoardDTO retrieve(int num);
+	
+	public int update(BoardDTO dto);
 
 }

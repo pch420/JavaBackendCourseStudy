@@ -20,7 +20,8 @@
 		String writeday = dto.getWriteday();
 		int readcnt = dto.getReadcnt();
 	%>
-	<form action="" method="">
+	<form action="update" method="get">
+	<input type="hidden" name="num" value="<%= num %>">
 	글번호: <%= num %><br>
 	작성일: <%= writeday %><br>
 	조회수: <%= readcnt %><br>
@@ -29,5 +30,6 @@
 		내용: <textarea rows="10" cols="10" name="content"><%= content %></textarea>
 		<input type="submit" value="수정"><br>
 	</form>
+	<a href="list">목록</a>
 </body>
 </html>
