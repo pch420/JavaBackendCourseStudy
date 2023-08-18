@@ -36,4 +36,11 @@ public class BoardDAO {
 		int n = session.update("BoardMapper.update", dto);
 		return n;
 	}
+
+	// 글 삭제
+	public int delete(SqlSession session, int num) {
+		int n = session.update("BoardMapper.delete", num);
+		return n;
+	}
+
 }

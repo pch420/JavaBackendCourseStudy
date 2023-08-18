@@ -14,5 +14,7 @@ public interface BoardService {
 	public BoardDTO retrieve(int num);
 	
 	public int update(BoardDTO dto);
+	
+	public int delete(int num);
 
 }
