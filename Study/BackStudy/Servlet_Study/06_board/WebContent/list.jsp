@@ -79,6 +79,10 @@
 		if(totalCount % perPage != 0){
 			totalNum++;
 		}
+		
+		// 검색용
+		String searchName = pageDTO.getSearchName();
+		String searchValue = pageDTO.getSearchValue();
 	%>
 	<tr>
 	<td colspan="6">
@@ -90,7 +94,7 @@
 			<%
 				}else{
 			%>
-			<a href="list?curPage=<%= i %>"><%= i %></a>
+			<a href="list?curPage=<%= i %>&searchName=<%= searchName %>&searchValue=<%= searchValue %>"><%= i %></a>
 			<%
 				} // end if
 			%>
