@@ -1,7 +1,7 @@
-show user;
+SHOW USER;
 
 -- ShopMiniMall 角嚼
--- 2. member table 积己
+-- 2. member table 积己 
 create table member
    ( userid varchar2(20) CONSTRAINT member_userid_pk PRIMARY KEY,
      passwd varchar2(20) not null,

@@ -10,12 +10,12 @@
 	session에서 찾고 없으면
 	application에서 최종적으로 찾는다.
  -->
-<c:if test="${login==null}">
+<c:if test="${empty login}">
 	<a href="<c:url value='LoginUIServlet'/>">로그인</a>
 	<a href="<c:url value='MemberUIServlet'/>">회원가입</a>
 </c:if>
 
-<c:if test="${login!=null}">
+<c:if test="${! empty login}">
 안녕하세요${login.username}<br>
 	<a href="<c:url value='LogoutServlet'/>">로그아웃</a>
 	<a href="">mypage</a>

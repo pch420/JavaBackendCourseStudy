@@ -138,10 +138,9 @@ show parameter db_name;
 
 -- ShopMiniMall 실습
 -- 1. shop 계정생성 
-CREATE USER shop IDENTIFIED BY shop;
+CREATE USER SHOP IDENTIFIED BY SHOP;
 
 grant resource, connect
-to shop;
-
+to SHOP;
 
 
