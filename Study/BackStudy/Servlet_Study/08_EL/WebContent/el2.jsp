@@ -35,6 +35,7 @@ application:<%= userid3 %><br>
 비번:<%= dto.getPasswd() %><br>
 list1:<%= list.get(0).getUserid() %><%= list.get(0).getPasswd() %><br>
 list2:<%= list.get(1).getUserid() %><%= list.get(1).getPasswd() %><br>
+
 <h2>2. EL 방식</h2>
 <%
   String kkk = "이순신"; // EL로 출력 불가. 반드시 scope에 저장된 값만 출력이 가능하다.

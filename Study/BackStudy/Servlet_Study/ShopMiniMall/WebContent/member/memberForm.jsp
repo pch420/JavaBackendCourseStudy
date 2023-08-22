@@ -1,17 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<form>
-*아이디:<input type="text" name="userid"><br>
-*비밀번호:<input type="text" name="passwd"><br>
-비밀번호확인:<input type="text" name="passwd2"><br>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> 
+<script>
+   $(document).ready(function(){
+	   // 비번일치 여부 확인
+	   $("#passwd2").on("keyup", function(){
+		    var passwd = $("#passwd").val();
+		    var passwd2 = $("#passwd2").val();
+		    var mesg = "비번 일치";
+		    if(passwd != passwd2){
+		    	mesg="비번 불일치"
+		    }
+		    
+		    $("#idcheck").text(mesg);
+	   });
+	   
+	   // id 중복체크
+	   $("#idDupulicatedcheck").on("click",function(){
+		   // submit 비활성
+		   event.preventDefault();
+		   // ajax 연동
+		   $.ajax({
+               type:"get",
+               url:"MemberIdCheckServlet",
+               data:{
+            	   userid:$("#userid").val()
+               },  // 요청코드
+               dataType:'text',  //  응답받은 데이터 타입
+               success:function(data, status, xhr){
+                 console.log(data);
+                 $("#result").text(data);
+               },
+               error:function(xhr, status, error){
+                    console.log("erro 발생");
+               }
+            });
+	   });
+	   
+	   // 모든 회원정보가 입력된후  submit 되도록 체크하기
+	   
+	   
+   });
+</script>   
+<form action="MemberAddServlet" method="post">
+*아이디:<input type="text" name="userid" id="userid">
+<button id="idDupulicatedcheck">중복확인</button><span id="result"></span><br>
+*비밀번호:<input type="text" name="passwd" id="passwd"><br>
+비밀번호확인:<input type="text" name="passwd2" id="passwd2"><span id="idcheck"></span><br>
 이름:<input type="text" name="username"><br>
 <!-- kakao address API -->
 <input type="text" name="post" id="sample4_postcode" placeholder="우편번호">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 <input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소">
 <input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소">
-<span id="guide" style="color:#999"></span><br>
-<!-- /kakao address API -->
+<span id="guide" style="color:#999"></span>
+<br>
+<!-- kakao address API -->
 전화번호:
 <select name="phone1">
  <option value="010">010</option>
