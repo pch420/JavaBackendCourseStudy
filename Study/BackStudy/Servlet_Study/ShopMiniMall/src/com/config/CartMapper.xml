@@ -20,6 +20,30 @@
  	   from cart
  	   where userid =#{userid}
  	</select>
+ 	
+ 	<!--수량 수정 -->
+ 	<update id="cartUpdate" parameterType="hashmap">
+ 		update cart
+ 		set gAmount = #{gAmount}
+ 		where num = #{num} 	
+ 	</update>
+ 	
+ 	<!-- 단일 삭제 -->
+ 	<delete id="cartDelete" parameterType="int">
+ 		delete from cart
+ 		where num = #{num}
+ 	</delete>
+ 	
+ 	<!-- 전체 삭제 -->
+ 	<delete id="cartDeleteAll" parameterType="arraylist">
+	    delete from cart
+	    <where>
+	      <foreach item="item"  collection="list"
+	        open="num IN (" separator="," close=")" >
+	          #{item}
+	      </foreach>
+	    </where>
+  </delete>
 </mapper>
 
 

@@ -1,7 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dto.CartDTO;
+import com.dao.CartDAO;
 import com.dto.MemberDTO;
 import com.service.CartService;
 import com.service.CartServiceImpl;
 
-@WebServlet("/CartListServlet")
-public class CartListServlet extends HttpServlet {
+@WebServlet("/CartDeleteServlet")
+public class CartDeleteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,22 +28,18 @@ public class CartListServlet extends HttpServlet {
 		String nextPage = null;
 		if (dto != null) {
 			// 로그인 한 경우
-			String userid = dto.getUserid();
-			// userid 값을 서비스 거쳐서 DAO 전달하고 반환
+			String num = request.getParameter("num");
+
+			// num 값을 서비스 거쳐서 DAO에 전달
 			CartService service = new CartServiceImpl();
-			List<CartDTO> list = service.cartList(userid);
+			int n = service.cartDelete(Integer.parseInt(num));
 
-			// scope에 저장
-			request.setAttribute("cartList", list);
-
-			nextPage = "cartList.jsp";
+			nextPage = "CartListServlet";
 		} else {
 			// 로그인 안했거나 했는데 time-out된 경우
 			nextPage = "member/checkLogin.jsp";
 		}
-
-		// 요청위임
-		request.getRequestDispatcher(nextPage).forward(request, response);
+		response.sendRedirect(nextPage);
 
 	}
 
