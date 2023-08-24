@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- order/orderConfirm.jsp -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    pageEncoding="UTF-8"%>
+<!--  order/orderConfirm.jsp -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> 
 <script>
-$(document).ready(function(){
-	
-	// 배송지 체크 이벤트
+   $(document).ready(function(){
+	   
+	   // 배송지 체크 이벤트
 	   $("#same_address").on("click", function(){
 		   var flag = this.checked;
 		   if(flag){
@@ -32,11 +31,38 @@ $(document).ready(function(){
 		   }
 		   
 	   });
-})
 
-</script>
-
+	   // 결제 버튼 이벤트
+	   $("#orderDoneBtn").on("click", function(){
+		   
+		    var f = $("form")[0];
+		    f.action="OrderDoneServlet";
+		    f.method="get";
+		    f.submit();
+		   
+	   });
+	   
+	   
+	   
+   });
+ </script>
 <form name="myForm" method="get" action="">
+    <!-- 상품 정보 -->
+    <input type="hidden"  name="gCode" value="${cDTO.gCode}" >
+    <input type="hidden"  name="gName" value="${cDTO.gName}" >
+    <input type="hidden"  name="gPrice" value="${cDTO.gPrice}" >
+    <input type="hidden"  name="gSize" value="${cDTO.gSize}" >
+    <input type="hidden"  name="gColor" value="${cDTO.gColor}" >
+    <input type="hidden"  name="gAmount" value="${cDTO.gAmount}" >
+    <input type="hidden"  name="gImage" value="${cDTO.gImage}" >
+    
+    <!--  Cart 테이블에서 삭제할 num 전달 -->
+    <input type="hidden"  name="num" value="${cDTO.num}" >
+    
+    <!-- 상품 정보 -->
+
+
+
 	<table width="80%" cellspacing="0" cellpadding="0">
 
 		<tr>
@@ -90,14 +116,11 @@ $(document).ready(function(){
 						<td class="td_default" align="center" width="110">${cDTO.gPrice}
 						</td>
 						<td class="td_default" align="center" width="90">${cDTO.gAmount}</td>
-
 					</tr>
-
-
 					<tr>
 						<td height="30"></td>
 						<td class="td_default" align="right">총 결제 금액 :</td>
-						<td class="td_default" align='right'>${cDTO.gAmount * cDTO.gPrice}원</td>
+						<td class="td_default" align='right'>${cDTO.gPrice * cDTO.gAmount}원</td>
 					</tr>
 				</table> <tr>
 			<td>
@@ -128,7 +151,6 @@ $(document).ready(function(){
 					style="border-collapse:collapse" bordercolor="#CCCCCC">
 				<tr>
 					<td width="125" height="35" class="td_default">
-						
 						이 름
 					</td>
 					<td height="35" class="td_default">
@@ -138,17 +160,14 @@ $(document).ready(function(){
 				</tr>
 				<tr>
 					<td height="35" class="td_default">
-						
 						우편번호
 					</td>
 					<td height="35" class="td_default">
 						<input class="input_default" type="text" id="mpost"  value="${mDTO.post}" readonly></input>
-						
 					</td>
 				</tr>
 				<tr>
 					<td height="35" class="td_default">
-						
 						주 소
 					</td>
 					<td height="35" class="td_default">
@@ -158,7 +177,6 @@ $(document).ready(function(){
 							maxlength="200" value="${mDTO.addr2}" readonly></input>
 					</td>
 				</tr>
-				
 				<tr>
 					<td height="35" class="td_default">
 						휴대전화
@@ -220,10 +238,10 @@ $(document).ready(function(){
 					</td>
 					<td height="35" class="td_default">
 <!-- 다음주소 시작-->
-<input type="text" id="sample4_postcode" placeholder="우편번호">
+<input type="text" name="post" id="sample4_postcode" placeholder="우편번호">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소">
+<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소">
 <span id="guide" style="color:#999"></span>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -339,7 +357,7 @@ $(document).ready(function(){
 	<tr>
 		<td class="td_default" align="center">
 			<input type='button' value='취소' onclick="javascript:history.back()">	
-			<input type='button' value='결제하기' onclick="orderDone(myForm)">
+			<input type='button' value='결제하기' id="orderDoneBtn">
 		</td>
 	</tr>
 
