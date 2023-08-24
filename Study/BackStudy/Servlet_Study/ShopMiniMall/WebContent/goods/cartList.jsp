@@ -63,6 +63,12 @@
 			
 		}); // end deleteAll
 		
+		// 주문 버튼 이벤트
+		$(".orderBtn").on("click", function(){
+			var num = $(this).attr("data-num");
+			location.href="OrderComfirmServlet?num="+num;
+			
+		}); // end deleteBtn
 		
 	})
 </script>
@@ -151,7 +157,7 @@
 				<span id="sum${dto.num}" data-price="${dto.gPrice}">
 				${dto.gAmount * dto.gPrice}
 				</span></td>
-			<td><input type="button" value="주문"></td>
+			<td><input type="button" value="주문" class="orderBtn" data-num="${dto.num}"></td>
 			<td class="td_default" align="center" width="30" style='padding-left: 10px'>
 				<input type="button" value="삭제" class="deleteBtn" data-num="${dto.num}">
 			</td>
