@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="c1" class="com.dto.Cat">
+		<property name="username" value="야옹이" />
+		<property name="age" value="2" />
+	</bean>
+	<bean id="c2" class="com.dto.Cat">
+		<property name="username" value="망치" />
+		<property name="age" value="1" />
+	</bean>
+	<bean id="service" class="com.service.UserService">
+		<property name="catList">
+			<list>
+				<ref bean="c1" />
+				<ref bean="c2" />
+				<ref bean="c1" />
+			</list>
+		</property>
+	</bean>
+</beans>

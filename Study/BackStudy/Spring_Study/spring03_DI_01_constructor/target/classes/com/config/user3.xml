@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 주입할 데이텨 값이 기본형 또는 문자열이 아닌 경우 value 대신 ref를 사용함 -->
+	<!-- name 속성의 값은 생성자의 파라미터 값임, 주의! id값이 아님 -->
+	<!-- UserDAO dao = new UserDAO(); -->
+	<bean id="dao" class="com.dao.UserDAO" />
+
+	<!-- UserService3 service = new UserService3(dao); -->
+	<bean id="service" class="com.service.UserService3">
+		<constructor-arg name="dao2" ref="dao" />
+		<constructor-arg name="num2" value="10" />
+	</bean>
+	
+	<!-- ref속성은 태그로도 사용가능함 -->
+	<bean id="service2" class="com.service.UserService3">
+		<constructor-arg name="dao2">
+			<ref bean="dao" />
+		</constructor-arg>
+		<constructor-arg name="num2" value="10" />
+	</bean>
+	
+	<bean id="service3" class="com.service.UserService3">
+		<constructor-arg ref="dao" />
+	</bean>
+
+</beans>

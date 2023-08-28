@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 기본 생성자, 이전방식 : UserService2 xxx = new UserService(); 동일 -->
+	<bean id="xxx" class="com.service.UserService2" />
+
+	<!-- num과 username 파라미터 값 주입 - type 생략 가능, type 지정생략하면 자동으로 형변환함 -->
+	<!-- 이전방식 : UserService2 xxx = new UserService2(10, 홍길동); 동일 -->
+	<!-- name 속성, 제일 많이 사용함 -->
+	<!-- name 속성의 값은 생성자의 파라미터 값임, 주의! id값이 아님 -->
+	<bean id="yyy" class="com.service.UserService2">
+		<constructor-arg name="username" value="홍길동" />
+		<constructor-arg name="num" value="10" />
+	</bean>
+	<!-- value속성은 태그로도 사용가능함 -->
+	<bean id="yyy2" class="com.service.UserService2">
+		<constructor-arg name="username">
+			<value>홍길동</value>
+		</constructor-arg>
+		<constructor-arg name="num">
+			<value>10</value>
+		</constructor-arg>
+	</bean>
+	<!-- index 속성, 0부터 시작 -->
+	<bean id="yyy3" class="com.service.UserService2">
+		<constructor-arg index="1" value="홍길동" />
+		<constructor-arg index="0" value="10" />
+	</bean>
+	<!-- 속성x -->
+	<bean id="yyy4" class="com.service.UserService2">
+		<constructor-arg value="10" />
+		<constructor-arg value="홍길동" />
+	</bean>
+</beans>
