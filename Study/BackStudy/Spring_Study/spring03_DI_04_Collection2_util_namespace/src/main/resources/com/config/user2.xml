@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<bean id="c1" class="com.dto.Cat">
+		<property name="username" value="야옹이" />
+		<property name="age" value="2" />
+	</bean>
+	<bean id="c2" class="com.dto.Cat">
+		<property name="username" value="망치" />
+		<property name="age" value="1" />
+	</bean>
+
+	<!-- util namespace -->
+	<util:set id="xxx">
+		<ref bean="c1" />
+		<ref bean="c2" />
+		<ref bean="c1" />
+	</util:set>
+
+	<bean id="service" class="com.service.UserService2">
+		<property name="catSet" ref="xxx" />
+	</bean>
+
+	<!-- set은 중복 불가이므로 "c1"이 하나만 생성됨 -->
+	<bean id="service2" class="com.service.UserService2">
+		<property name="catSet">
+			<set>
+				<ref bean="c1" />
+				<ref bean="c2" />
+				<ref bean="c1" />
+			</set>
+		</property>
+	</bean>
+</beans>
