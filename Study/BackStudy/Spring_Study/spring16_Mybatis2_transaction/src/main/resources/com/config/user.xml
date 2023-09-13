@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+	<!-- mybatis 연동 시작 -->
+	<!-- 1. jdbc.properties 등록 -->
+	<context:property-placeholder
+		location="classpath:com/config/jdbc.properties" />
+
+	<!-- 2. DBCP 역할의 BasicDataSource 등록 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+	<!-- transaction 처리 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<!-- (this dependency is defined somewhere else) -->
+    	<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<tx:annotation-driven transaction-manager="txManager"/> 
+	<!-- transaction 처리 끝 -->
+
+	<!-- 3. SqlSessionFactoryBean 등록 -->
+	<bean id="sessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:com/config/DeptMapper.xml</value>
+			</list>
+		</property>
+		<property name="typeAliases">
+			<list>
+				<value>com.dto.DeptDTO</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 4. SqlSessionTemplate등록 -->
+	<!-- set메서드가 없기 때문에 property 대신 constructor-arg를 사용 -->
+	<bean id="session" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- mybatis 연동 끝 -->
+	
+	<!-- 5. DAO 에서  SqlSessionTemplate 주입 받아서 사용한다. -->
+	<!-- DAO, Service 빈으로 등록 -->
+	<!-- 생성할 빈들의 정보를 패키지 단위로 지정 -->
+	<!-- 마킹된 빈들만 생성됨 - @Component, @Repository, @Service, ... 등 -->
+	<context:component-scan base-package="com.*" />
+</beans>
