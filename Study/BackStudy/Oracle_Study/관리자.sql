@@ -143,4 +143,3 @@ CREATE USER SHOP IDENTIFIED BY SHOP;
 grant resource, connect
 to SHOP;
 
-

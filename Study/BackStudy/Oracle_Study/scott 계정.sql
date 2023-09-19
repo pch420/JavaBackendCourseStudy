@@ -734,3 +734,18 @@ create sequence board_seq;
 insert into board ( num, title, author, content )
 values ( board_seq.nextval , '테스트', '홍길동', '테스트입니다' );
 commit;
+
+-- spring 스킬 평가 notice 테이블 작성
+    create table notice
+  (  no NUMBER(6) CONSTRAINT notice_num_pk PRIMARY KEY,
+     title VARCHAR2(200) CONSTRAINT notice_title_nn not null,
+     author varchar2(20) CONSTRAINT notice_author_nn not null,
+     content varchar2(400),
+     writeday DATE  DEFAULT SYSDATE,
+     readcnt NUMBER(4) DEFAULT 0 );   
+
+create sequence notice_seq;
+
+insert into notice ( no, title, author, content )
+values ( notice_seq.nextval , '배송관련', '이순신', '언제 배송 되나요?' );
+commit;
