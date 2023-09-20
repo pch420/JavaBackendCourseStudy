@@ -8,8 +8,11 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- jdbc.properties 등록 -->
 	<context:property-placeholder location="classpath:com/config/jdbc.properties" />
 	
+	<!-- DBCP 등록 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driver}" />
 		<property name="url" value="${jdbc.url}" />
@@ -17,14 +20,15 @@
 		<property name="password" value="${jdbc.password}" />
 	</bean>
 
-	<!-- transaction -->
+	<!-- TransactionManager 등록 -->
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <!-- (this dependency is defined somewhere else) -->
         <property name="dataSource" ref="dataSource"/>
 	</bean>
 	<tx:annotation-driven transaction-manager="txManager"/>
-	<!-- transaction -->
 
+	<!-- SqlSessionFactoryBean 등록 -->
+	<!-- Mapper.xml 및  DTO 별칭 -->
 	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
@@ -39,6 +43,7 @@
 		</property>
 	</bean>
 
+	<!-- SqlSessionTemplate 등록 -->
 	<bean id="session" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory" ref="sessionFactory" />
 	</bean>		
