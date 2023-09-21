@@ -42,6 +42,30 @@
 			<mvc:mapping path="/CartAddServlet" />
 			<ref bean="xxx" />
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/CartListServlet" />
+			<ref bean="xxx" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/CartUpdateServlet" />
+			<ref bean="xxx" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/CartDeleteServlet" />
+			<ref bean="xxx" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/CartDeleteAllServlet" />
+			<ref bean="xxx" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/OrderComfirmServlet" />
+			<ref bean="xxx" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/OrderDoneServlet" />
+			<ref bean="xxx" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	<!-- view만 보여줄 때 -->
